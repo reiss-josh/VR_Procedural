@@ -40,7 +40,11 @@ namespace Valve.VR.InteractionSystem
         [Tooltip("This action lets you know when the player has placed the headset on their head")]
         public SteamVR_Action_Boolean headsetOnHead = SteamVR_Input.GetBooleanAction("HeadsetOnHead");
 
+		[Tooltip("Flag for locomotion handedness.")]
+		public SteamVR_Input_Sources movementHandType;
+
 		public bool allowToggleTo2D = true;
+		
 
 
 		//-------------------------------------------------
@@ -184,6 +188,22 @@ namespace Valve.VR.InteractionSystem
                             return hmdTransforms[i];
                     }
                 }
+				return null;
+			}
+		}
+
+		public Transform moveHandTransform
+		{
+			get
+			{
+				if (hands != null)
+				{
+					for (int i = 0; i < hands.Length; i++)
+					{
+						if (hands[i].handType == movementHandType)
+							return hands[i].GetComponent<Transform>();
+					}
+				}
 				return null;
 			}
 		}
