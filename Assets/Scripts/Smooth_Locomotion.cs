@@ -8,11 +8,12 @@ public class Smooth_Locomotion : MonoBehaviour
 {
     public SteamVR_Action_Vector2 stickInput;
     public float speed = 1.0f;
-    public float gravity = 5.0f;
+    public float gravity = 4.0f;
     private CharacterController charController;
     public Transform cameraTransform;
     public Transform bodyTransform;
 
+    //start is called at start
     private void Start()
     {
         charController = GetComponent<CharacterController>();
