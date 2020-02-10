@@ -1,3 +1,7 @@
+**
+https://developer.nvidia.com/gpugems/gpugems3/part-i-geometry/chapter-1-generating-complex-procedural-terrains-using-gpu
+-- marching cubes as explained by Nvidia
+**
 https://docs.unity3d.com/ScriptReference/Mathf.PerlinNoise.html
 -- reference for using perlin noise
 
@@ -12,3 +16,12 @@ https://www.youtube.com/watch?v=B_xk71YopsA
 
 https://valvesoftware.github.io/steamvr_unity_plugin/
 -- SteamVR documentation
+
+https://github.com/SebLague/Marching-Cubes
+-- marching cubes git
+
+https://github.com/mxgmn/WaveFunctionCollapse
+-- wave function collapse git
+
+https://github.com/marian42/wavefunctioncollapse
+-- wave function collapse city git
