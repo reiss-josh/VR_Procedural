@@ -1,7 +1,6 @@
-**
-https://developer.nvidia.com/gpugems/gpugems3/part-i-geometry/chapter-1-generating-complex-procedural-terrains-using-gpu
--- marching cubes as explained by Nvidia
-**
+**https://developer.nvidia.com/gpugems/gpugems3/part-i-geometry/chapter-1-generating-complex-procedural-terrains-using-gpu
+-- marching cubes as explained by Nvidia**
+
 https://docs.unity3d.com/ScriptReference/Mathf.PerlinNoise.html
 -- reference for using perlin noise
 
