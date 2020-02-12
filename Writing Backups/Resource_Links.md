@@ -1,6 +1,12 @@
 **https://developer.nvidia.com/gpugems/gpugems3/part-i-geometry/chapter-1-generating-complex-procedural-terrains-using-gpu
 -- marching cubes as explained by Nvidia**
 
+**http://paulbourke.net/geometry/polygonise/
+-- other explanation of marching cubes**
+
+https://people.eecs.berkeley.edu/~jrs/meshpapers/LorensenCline.pdf
+-- research paper on marching cubes
+
 https://docs.unity3d.com/ScriptReference/Mathf.PerlinNoise.html
 -- reference for using perlin noise
 
