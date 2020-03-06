@@ -23,40 +23,34 @@ Due Apr 17th -- First Draft
 CHAPTERS
 <ul>
 <li>1: Introduction</li>
-<li>2: On Games Literacy</li>
-<ul>
-<li>A discussion of what games literacy is, why it’s a problem, and why I think VR is the solution</li>
-</ul>
-<li>3: On Level Generation</li>
-<ul>
-<li>A discussion of the various algorithms I found while searching.</li>
-<li>A delineation between “random” and “procedural.”</li>
-</ul>
-<li>4: On Virtual Reality</li>
-<ul>
-<li>A discussion of the struggles with working in VR.</li>
-<li>I feel like I’m going to throw up whenever I run unoptimized code, etc.</li>
-</ul>
-<li>5: On Marching Cubes</li>
-<ul>
-<li>A discussion of the actual algorithm -- probably a very fun chapter to write</li>
-</ul>
-<li>6: On Forest Generation</li>
-<ul>
-<li>This chapter might end up being really short / might not exist</li>
-</ul>
-<li>7: On Wave Function Collapse</li>
-<ul>
-<li>This chapter might not exist if I don’t get around to implementing it</li>
-</ul>
-<li>8: On the Programming Process</li>
-<ul>
-<li>SteamVR -- what is? why use it?</li>
-<li>Unity -- what is? why use it?</li>
-<li>Roadblocks along the way</li>
-</ul>
-<li>9: The End Product</li>
-<ul>
-<li>I have no idea what this chapter is or if it’s necessary until I finish</li>
-</ul>
+<li>2: On Level Generation</li>
+  <ul>
+    <li>A delineation between “random” and “procedural.”</li>
+    <li>An explanation of what Perlin Noise is</li>
+    <li>Some demonstrations of Perlin Noise growing from 1 to 3 dimensions, just mapping points.</li>
+  </ul>
+<li>3: On Marching Cubes</li>
+  <ul>
+  <li>A discussion of the actual algorithm -- probably a very fun chapter to write</li>
+  <li>Start by explaining why this is necessary -- we want triangles!</li>
+  <li>Carefully explain marching squares.</li>
+  <li>Carefully explain marching cubes.</li>
+  </ul>
+<li>4: On Forest Generation</li>
+  <ul>
+  <li>This chapter might end up being really short / might not exist</li>
+  </ul>
+<li>5: On Wave Function Collapse</li>
+  <ul>
+  <li>This chapter might not exist if I don’t get around to implementing it</li>
+  </ul>
+<li>6: On Virtual Reality</li>
+  <ul>
+  <li>A discussion of the struggles with working in VR.</li>
+  <li>I feel like I’m going to throw up whenever I run unoptimized code, etc.</li>
+  </ul>
+<li>7: The End Product</li>
+  <ul>
+  <li>I have no idea what this chapter is or if it’s necessary until I finish</li>
+  </ul>
 </ul>
