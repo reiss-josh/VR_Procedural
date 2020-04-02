@@ -150,7 +150,7 @@
 	
 \chapter{General Level Generation}
 \section{Procedural Generation vs. The World}
-Before we talk about procedural generation techniques, we first ought to define what we even mean by that. We're making up our own definitions here, but that will be good enough for what we want to talk about.
+Before we talk about procedural generation techniques, we first ought to define what that means. We're making up our own definitions here, but that will be good enough for what we want to discuss.
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 \begin{definition}{Random Level Generation}
@@ -162,7 +162,7 @@ Building an environment using prebuilt assets and some algorithm.
 Building an environment strictly algorithmically.
 \end{definition}
  
-Put simply: where random level generation uses prebuilt assets and some algorithm to cobble a world together, procedural level generation uses some algorithm to work entirely from scratch. Let's try thinking about this via an example.
+Put simply: where random level generation uses prebuilt assets and some algorithm to cobble a world together, procedural level generation uses some algorithm to generate worlds entirely from scratch. Let's try thinking about this by example.
 
 Imagine we draw 64 rooms, each 8x8 in size, on pieces of graph paper, and throw them into a hat.
 Then, we use an algorithm like this:
@@ -171,15 +171,15 @@ Then, we use an algorithm like this:
 \SetKwFunction{FRandRoom}{randRoom}{}
 \begin{algorithm}
 \Fn{\FGraphRooms{numRoomsDesired, ourRooms}{}}{:\\
-1. ourLevel = new $Level()$; \qquad\qquad\qquad\quad\enskip//define our level\\
-2. ourHat = new $Hat(ourRooms)$; \quad\quad\quad\quad //put our rooms in a hat\\
-3. startRoom = $ourHat.getRandomRoom()$; //draw a room from the hat\\
-4. $ourLevel.place(startRoom, (0,0))$;\\
-5. \While {numRoomsDesired $\geq$ 0:}{
-    \quad wall = $ourLevel.getLonelyWall()$; \qquad//get a wall with no neighbor\\
-    \quad newRoom = $ourHat.getRandomRoom()$;\\
-    \quad $ourLevel.placeAdj(newRoom, wall)$; \enskip//put newRoom next to wall1\\
-    \quad $ourLevel.createDoor(startRoom,newRoom,wall)$; //make a door\\
+1. ourLevel = new $Level()$; \qquad\qquad\qquad\qquad\quad //define our level\\
+2. ourHat = new $Hat(ourRooms)$; qquad\qquad\quad //put our rooms in a hat\\
+3. startRoom = $ourHat.getRandomRoom()$;\quad\enskip //draw a room from the hat\\
+4. $ourLevel.place(startRoom, (0,0))$; \qquad\qquad\enskip //place a room at origin\\
+5. \While {numRoomsDesired $\geq$ 0: \qquad\qquad\qquad //for num of rooms desired:}{
+    \quad wall = $ourLevel.getLonelyWall()$; \qquad\quad //get a wall with no neighbor\\
+    \quad newRoom = $ourHat.getRandomRoom()$;\enskip //draw a room from the hat\\
+    \quad $ourLevel.placeAdj(newRoom, wall)$; \qquad //put newRoom next to wall\\
+    \quad $ourLevel.createDoor(newRoom,wall)$; \quad //make a door in wall\\
     \quad numRoomsDesired -= 1;\\
     }
 6. return ourLevel;\\
@@ -187,9 +187,10 @@ Then, we use an algorithm like this:
 \end{algorithm}
 \newpage
 
-This would be random level generation. All our algorithm did was staple together prebuilt content.
+This would be random level generation, since all our algorithm did was staple together prebuilt content from the hat.
 A procedural generation algorithm, on the other hand, would generate our world completely from scratch.
-If we wanted to imagine an extremely simple procedural algortihm, we could write something that looks like:
+
+For an extremely simple procedural algortihm, we could write something that looks like:
 
 \begin{algorithm}
 \For {all $(x,y)$ in world:}{
@@ -204,8 +205,6 @@ If we wanted to imagine an extremely simple procedural algortihm, we could write
 }
 \end{algorithm}
 
-The result might look something like this:
-
 \includegraphics[scale=0.2]{xyGrid}
 
 Or, if we wanted something less boring than a square full of points, we could always try the following:
@@ -214,7 +213,7 @@ Or, if we wanted something less boring than a square full of points, we could al
 \Fn{\Flevel{numRoomsDesired}}{:\\
     1. room[64] roomSet;\\
     2. \For {(int i = 0; i $<$ 64; i++):}{
-        \quad room[i] = $emptySquare(8)$; //creates an empty 8x8 square\\
+        \quad roomSet[i] = $emptySquare(8)$; //creates an empty 8x8 square room\\
     }
     3. return $GraphRooms(16,roomSet)$;\\ 
     
@@ -224,24 +223,24 @@ Or, if we wanted something less boring than a square full of points, we could al
 While it is true that this is making use of the same function as our random generation algorithm, we still consider this to be a procedural generation algorithm, since we created our rooms in code via some function $emptySquare()$, rather than building them by hand.
 
 Now that we've made the distinction between these methods, it might initially seem like procedural generation is much easier.
-After all, in order to build our basic random generation algorithm, we had to draw 64 rooms by hand! That takes a lot of creative energy.
+After all, in order to build our basic random generation algorithm, we had to draw 64 rooms ourselves! That takes a lot of creative energy.
 
 However, true as that may be, it is much harder to make procedural generation result in something interesting. A grid full of points or a maze of empty rooms probably isn't a very fun environment to explore, especially when compared to a random set of hand-built rooms. So, what can we do?
 
 \section{What's all that noise!?}
 We can do what everyone else does -- we'll use noise!
-A very common choice of noise function for level generation is Perlin Noise, developed by Ken Perlin for use on the 1980 film \textit{Tron}.
+A very common choice of noise function for level generation is Perlin Noise, developed by Ken Perlin for use on the 1982 film \textit{Tron}.
 The actual algorithm can be found at \href{https://mrl.nyu.edu/perlin/noise}{mrl.nyu.edu/perlin/noise}.
 
-I don't expect you to read the text at that link, but trust me when I tell you that Perlin Noise is a fairly simple algorithm that gives incredibly helpful results. Perlin won an Academy Award in 1997 in recognition of his algorithms' usefulness for film effects, and just about every modern procedurally-generated game uses Perlin Noise to some degree.
+I don't expect you to read the text at that link, but trust me when I tell you that Perlin Noise is a fairly simple algorithm that gives incredibly helpful results. Perlin won an Academy Award in 1997 in recognition of his algorithms' impact on the field of CGI, and just about every modern procedurally-generated game uses Perlin Noise to some degree.
 
-Conceptually, the algorithm is quite simple: Perlin Noise takes any values(x,y) and gives back some w $\in \{$-1,1$\}$ that feel relatively random, but for any set of points $\{x_1, x_2, ... xn\}$, the resulting points $\{y_1, y_2... yn\}$ look relatively "smooth" when plotted on a graph.
+Conceptually, the algorithm is quite simple: Perlin Noise takes any values(x,y) and gives back some w $\in \{$-1,1$\}$ that feel relatively random, but for any set of points $\{(x_1,y_1), (x_2,y_2), ... (x_n,y_n)\}$, the resulting points $\{w_1, w_2... w_n\}$ look relatively "smooth." More rigorously: the Perlin Noise function is continous, and the gradient at some given $perlin(x,y)$ is quite similar to the gradient at $perlin(x+1,y+1)$.
 
-To demonstrate what I'm talking about, let's try graphing some one dimensional Perlin results.
+To demonstrate what I'm talking about, let's try graphing some one-dimensional Perlin results.
 
 \includegraphics[scale=0.15]{yPerlin}
 
-We're just mapping $perlin(x) = y$ here, and it already looks like if we drew this out infinitely we could get something that looked like a hillside.
+We're just mapping $perlin(x) = y$ here, and we can very easily observe the "smoothness" of the noise. It looks like if we drew this out infinitely, we would get something that resembled a hillside.
 
 What if we want something more complicated than hills?
 We could try mapping $perlin(x,y)$ = $w$, and then set some threshold $t$ $\in \{$-1,1$\}$ like so:
