@@ -1,0 +1,859 @@
+% This is the Reed College LaTeX thesis template. Most of the work 
+% for the document class was done by Sam Noble (SN), as well as this
+% template. Later comments etc. by Ben Salzberg (BTS). Additional
+% restructuring and APA support by Jess Youngberg (JY).
+% Your comments and suggestions are more than welcome; please email
+% them to cus@reed.edu
+%
+% See http://web.reed.edu/cis/help/latex.html for help. There are a 
+% great bunch of help pages there, with notes on
+% getting started, bibtex, etc. Go there and read it if you're not
+% already familiar with LaTeX.
+%
+% Any line that starts with a percent symbol is a comment. 
+% They won't show up in the document, and are useful for notes 
+% to yourself and explaining commands. 
+% Commenting also removes a line from the document; 
+% very handy for troubleshooting problems. -BTS
+
+% As far as I know, this follows the requirements laid out in 
+% the 2002-2003 Senior Handbook. Ask a librarian to check the 
+% document before binding. -SN
+
+%%
+%% Preamble
+%%
+% \documentclass{<something>} must begin each LaTeX document
+\documentclass[12pt,twoside]{reedthesis}
+\usepackage[boxed, noend, noline]{algorithm2e}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\SetKwFunction{FTriangulate}{Triangulate}{}
+\SetKw{Fn}{fun}
+\SetKw{Cl}{class}
+\SetKwFor{For}{for}{}{}%
+\SetKwFor{While}{while}{}{}%
+\SetKwIF{If}{ElseIf}{Else}{if}{}{elif}{else}{}%
+\LinesNotNumbered
+% Packages are extensions to the basic LaTeX functions. Whatever you
+% want to typeset, there is probably a package out there for it.
+% Chemistry (chemtex), screenplays, you name it.
+% Check out CTAN to see: http://www.ctan.org/
+%%
+\usepackage{graphicx,latexsym} 
+\usepackage{amssymb,amsthm,amsmath}
+\usepackage{longtable,booktabs,setspace} 
+\usepackage{chemarr} %% Useful for one reaction arrow, useless if you're not a chem major
+\usepackage[hyphens]{url}
+\usepackage{rotating}
+\usepackage{natbib}
+% Comment out the natbib line above and uncomment the following two lines to use the new 
+% biblatex-chicago style, for Chicago A. Also make some changes at the end where the 
+% bibliography is included. 
+%\usepackage{biblatex-chicago}
+%\bibliography{thesis}
+
+% \usepackage{times} % other fonts are available like times, bookman, charter, palatino
+
+\title{My Final College Paper}
+\author{Josh E. Reiss}
+% The month and year that you submit your FINAL draft TO THE LIBRARY (May or December)
+\date{May 2020}
+\division{Mathematics and Natural Sciences}
+\advisor{Eric ? Roberts}
+%If you have two advisors for some reason, you can use the following
+%\altadvisor{Your Other Advisor}
+%%% Remember to use the correct department!
+\department{Computer Science}
+% if you're writing a thesis in an interdisciplinary major,
+% uncomment the line below and change the text as appropriate.
+% check the Senior Handbook if unsure.
+%\thedivisionof{The Established Interdisciplinary Committee for}
+% if you want the approval page to say "Approved for the Committee",
+% uncomment the next line
+%\approvedforthe{Committee}
+
+\setlength{\parskip}{0pt}
+%%
+%% End Preamble
+%%
+%% The fun begins:
+\begin{document}
+
+  \maketitle
+  \frontmatter % this stuff will be roman-numbered
+  \pagestyle{empty} % this removes page numbers from the frontmatter
+
+% Acknowledgements (Acceptable American spelling) are optional
+% So are Acknowledgments (proper English spelling)
+    \chapter*{Acknowledgements}
+	I want to thank a few people.
+
+% The preface is optional
+% To remove it, comment it out or delete it.
+    \chapter*{Preface}
+	This is an example of a thesis setup to use the reed thesis document class.
+	
+	
+
+    \chapter*{List of Abbreviations}
+		You can always change the way your abbreviations are formatted. Play around with it yourself, use tables, or come to CUS if you'd like to change the way it looks. You can also completely remove this chapter if you have no need for a list of abbreviations. Here is an example of what this could look like:
+
+	\begin{table}[h]
+	\centering % You could remove this to move table to the left
+	\begin{tabular}{ll}
+		\textbf{ABC}  	&  American Broadcasting Company \\
+		\textbf{CBS}  	&  Columbia Broadcasting System\\
+		\textbf{CDC}  	&  Center for Disease Control \\
+		\textbf{CIA}  	&  Central Intelligence Agency\\
+		\textbf{CLBR} 	&  Center for Life Beyond Reed\\
+		\textbf{CUS}  	&  Computer User Services\\
+		\textbf{FBI}  	&  Federal Bureau of Investigation\\
+		\textbf{NBC}  	&  National Broadcasting Corporation\\
+	\end{tabular}
+	\end{table}
+	
+
+    \tableofcontents
+% if you want a list of tables, optional
+    \listoftables
+% if you want a list of figures, also optional
+    \listoffigures
+
+% The abstract is not required if you're writing a creative thesis (but aren't they all?)
+% If your abstract is longer than a page, there may be a formatting issue.
+    \chapter*{Abstract}
+	The preface pretty much says it all.
+
+  \mainmatter % here the regular arabic numbering starts
+  \pagestyle{fancyplain} % turns page numbering back on
+
+%The \introduction command is provided as a convenience.
+%if you want special chapter formatting, you'll probably want to avoid using it altogether
+
+    \chapter*{Introduction}
+         \addcontentsline{toc}{chapter}{Introduction}
+	\chaptermark{Introduction}
+	\markboth{Introduction}{Introduction}
+	% The three lines above are to make sure that the headers are right, that the intro gets included in the table of contents, and that it doesn't get numbered 1 so that chapter one is 1.
+
+% Double spacing: if you want to double space, or one and a half 
+% space, uncomment one of the following lines. You can go back to 
+% single spacing with the \singlespacing command.
+% \onehalfspacing
+% \doublespacing
+	
+	This is the introduction.
+	
+\chapter{General Level Generation}
+\section{Procedural Generation vs. The World}
+Before we talk about procedural generation techniques, we first ought to define what that means. We're making up our own definitions here, but that will be good enough for what we want to discuss.
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\begin{definition}{Random Level Generation}
+
+Building an environment using prebuilt assets and some algorithm.
+\end{definition}
+\begin{definition}{procedural level generation}
+
+Building an environment strictly algorithmically.
+\end{definition}
+ 
+Put simply: where random level generation uses prebuilt assets and some algorithm to cobble a world together, procedural level generation uses some algorithm to generate worlds entirely from scratch. Let's try thinking about this by example.
+
+Imagine we draw 64 rooms, each 8x8 in size, on pieces of graph paper, and throw them into a hat.
+Then, we use an algorithm like this:
+
+\SetKwFunction{FGraphRooms}{GraphRooms}{}
+\SetKwFunction{FRandRoom}{randRoom}{}
+\begin{algorithm}
+\Fn{\FGraphRooms{numRoomsDesired, ourRooms}{}}{:\\
+1. ourLevel = new $Level()$; \qquad\qquad\qquad\qquad\quad //define our level\\
+2. ourHat = new $Hat(ourRooms)$; qquad\qquad\quad //put our rooms in a hat\\
+3. startRoom = $ourHat.getRandomRoom()$;\quad\enskip //draw a room from the hat\\
+4. $ourLevel.place(startRoom, (0,0))$; \qquad\qquad\enskip //place a room at origin\\
+5. \While {numRoomsDesired $\geq$ 0: \qquad\qquad\qquad //for num of rooms desired:}{
+    \quad wall = $ourLevel.getLonelyWall()$; \qquad\quad //get a wall with no neighbor\\
+    \quad newRoom = $ourHat.getRandomRoom()$;\enskip //draw a room from the hat\\
+    \quad $ourLevel.placeAdj(newRoom, wall)$; \qquad //put newRoom next to wall\\
+    \quad $ourLevel.createDoor(newRoom,wall)$; \quad //make a door in wall\\
+    \quad numRoomsDesired -= 1;\\
+    }
+6. return ourLevel;\\
+}
+\end{algorithm}
+\newpage
+
+This would be random level generation, since all our algorithm did was staple together prebuilt content from the hat.
+A procedural generation algorithm, on the other hand, would generate our world completely from scratch.
+
+For an extremely simple procedural algortihm, we could write something that looks like:
+
+\begin{algorithm}
+\For {all $(x,y)$ in world:}{
+\If{(x $<$ -10 $\mid\mid$ x $>$ 10 $\mid\mid$ y $<$ -10 $\mid\mid$ y $>$ 10)}{
+    $(x,y)$ = Black\;}
+\Else{
+    bw = random(0 or 1)\;
+    \If{bw == 0}{
+        $(x,y)$ = Black\;}
+    \Else{
+        $(x,y)$ = White\;}}
+}
+\end{algorithm}
+
+\includegraphics[scale=0.2]{xyGrid}
+
+Or, if we wanted something less boring than a square full of points, we could always try the following:
+\SetKwFunction{Flevel}{FunLevel}{}
+\begin{algorithm}
+\Fn{\Flevel{numRoomsDesired}}{:\\
+    1. room[64] roomSet;\\
+    2. \For {(int i = 0; i $<$ 64; i++):}{
+        \quad roomSet[i] = $emptySquare(8)$; //creates an empty 8x8 square room\\
+    }
+    3. return $GraphRooms(16,roomSet)$;\\ 
+    
+}
+\end{algorithm}
+
+While it is true that this is making use of the same function as our random generation algorithm, we still consider this to be a procedural generation algorithm, since we created our rooms in code via some function $emptySquare()$, rather than building them by hand.
+
+Now that we've made the distinction between these methods, it might initially seem like procedural generation is much easier.
+After all, in order to build our basic random generation algorithm, we had to draw 64 rooms ourselves! That takes a lot of creative energy.
+
+However, true as that may be, it is much harder to make procedural generation result in something interesting. A grid full of points or a maze of empty rooms probably isn't a very fun environment to explore, especially when compared to a random set of hand-built rooms. So, what can we do?
+
+\section{What's all that noise!?}
+We can do what everyone else does -- we'll use noise!
+A very common choice of noise function for level generation is Perlin Noise, developed by Ken Perlin for use on the 1982 film \textit{Tron}.
+The actual algorithm can be found at \href{https://mrl.nyu.edu/perlin/noise}{mrl.nyu.edu/perlin/noise}.
+
+I don't expect you to read the text at that link, but trust me when I tell you that Perlin Noise is a fairly simple algorithm that gives incredibly helpful results. Perlin won an Academy Award in 1997 in recognition of his algorithms' impact on the field of CGI, and just about every modern procedurally-generated game uses Perlin Noise to some degree.
+
+Conceptually, the algorithm is quite simple: Perlin Noise takes any values(x,y) and gives back some w $\in \{$-1,1$\}$ that feel relatively random, but for any set of points $\{(x_1,y_1), (x_2,y_2), ... (x_n,y_n)\}$, the resulting points $\{w_1, w_2... w_n\}$ look relatively "smooth." More rigorously: the Perlin Noise function is continous, and the gradient at some given $perlin(x,y)$ is quite similar to the gradient at $perlin(x+1,y+1)$.
+
+To demonstrate what I'm talking about, let's try graphing some one-dimensional Perlin results.
+
+\includegraphics[scale=0.15]{yPerlin}
+
+We're just mapping $perlin(x) = y$ here, and we can very easily observe the "smoothness" of the noise. It looks like if we drew this out infinitely, we would get something that resembled a hillside.
+
+What if we want something more complicated than hills?
+We could try mapping $perlin(x,y)$ = $w$, and then set some threshold $t$ $\in \{$-1,1$\}$ like so:
+
+\begin{algorithm}
+\For {all(x,y) $\in$ world:}{
+    w = $perlin(x,y)$\;
+    \If{(w $>$ t):}{
+        $(x,y)$ = Black\;}
+    \Else{
+        $(x,y)$ = White\;}
+}
+\end{algorithm}
+
+\includegraphics[scale=0.15]{xyPerlin}
+
+That looks more like an environment to me.
+Building something similar in 3D isn't too hard.
+We just map $perlin(x,y,z) = w$, and then try the following:
+\begin{algorithm}
+\For {all(x,y,z) $\in$ world:}{
+    w = $perlin(x,y,z)$\;
+    \If{(w $>$ t):}{
+        $(x,y,z)$ = Black\;}
+    \Else{
+        $(x,y,z)$ = White\;}
+}
+\end{algorithm}
+
+\includegraphics[scale=0.18]{3dPerlin}
+
+Now we have something resembling a 3D voxel world! (Those small, floating white dots represent voxels for which w $<$ t, just for visualization purposes).
+
+But -- all we've been doing so far is place points.
+If we wanted to use this method to generate worlds that don't look blocky, we would need an absurdly high number of voxels.
+It might still look a little blocky anyways!
+So, what can we do?
+
+\section{Marching Squares}
+We're going to use an algorithm called Marching Cubes. First, though, we're going to ease our way into it by explaining Marching Squares.
+
+We imagine a square space of points on an (x,y) plane of size (m,m). We call each of these points a pixel, with values (x,y,w), where x and y are its Cartesian coordinates, and w = perlin(x,y).
+Within our square space of points, we will consider every 2x2 square to be a "cell".
+
+Let us consider a single cell.
+We will number each pixel 0-3, and number each edge 0-3.
+
+[INSERT FIGURE]
+
+Given this cell, we want to generate some mesh of triangles.
+We will consider a given pixel to be a "1" if its w is greater than some threshold - let's say, 0.5. We will consider a given pixel to be a "0" otherwise.
+
+Let's consider the simplest cell, where only one pixel is a "1".
+If we wanted to generate a triangle, we might do something like this:
+
+[INSERT FIGURE]
+
+We merge the edges that are directly attached to the pixel, then shade the resulting triangle. It follows that, for any rotation of this cell, we would do the same.
+
+Let us now consider a cell where two opposite corners are "1"s.
+
+[INSERT FIGURE]
+
+Once again, we just attach the edges adjacent to our pixels at their midpoints. Naturally, this can be rotated as well.
+
+What, then, if we have two adjacent pixels set to "1"?
+
+[INSERT FIGURE]
+
+We join the two edges that are adjacent to at exactly one "1" pixel.
+
+What about three pixels set to "1"?
+
+[INSERT FIGURE]
+
+Once again, we join the edges that are adjacent to strictly one "1" pixel.
+We are beginning to see a pattern emerge.
+
+Finally, what if we set all four to "1"?
+
+[INSERT FIGURE]
+
+We try to follow our pattern of joining the two edges that are adjacent to exactly one "1" pixel, but no such edge exists! Therefore, we do nothing.
+
+So, we've visually intuited what we think one ought to do with a given cell.
+
+There are 16 cases here - our single-corner case has four rotations, our opposite corners case has two rotations, our adjacent corners case has four rotations, our three corners case has four rotations, and then there are the two cases where all corners are the same.
+
+[INSERT DIAGRAM]
+
+It might seem trivial to formalize this as an algorithm - something like:
+
+\SetKwFunction{FJoin}{Join}{}
+\begin{algorithm}
+struct edge = $\{$int edgeValue, int[2] midpointXY$\}$\;
+struct pixel = $\{$int x, int y, int w, int pixelNum, edge[2] Neighbors$\}$\;
+struct polygon = $\{$pixel[] vertices, edge[] edges$\}$\;
+struct Triangle = $\{$edge[3] edges, pixel[3] vertices$\}$\;
+edge[8] Edges\;
+pixel[4] Pixels\;
+Polygon[3] Areas\;
+\Fn{\FJoin{edge1, edge2}}{:\\
+    1. joinEdge = new edge (connects midpoints of edge1 and edge2)\;
+    2. cornerVert1 = new pixel (one vertex perpendicular to joinEdge)\;
+    3. cornerVert2 = new pixel (other vertex perpendicular to joinEdge)\;
+    4. \If{cornerVert1.w \textgreater threshold}{goodVert = cornerVert1\;}
+    5. \Else{goodVert = cornerVert2\;}
+    6. verts = $\{$edge1.midpointXY, edge2.midpointXY, goodVert$\}$\;
+    7. tri = new Triangle $\{$[edge1, edge2, joinEdge], verts $\}$\;
+    8. return tri\;
+}
+\Fn{\FTriangulate{cell}}{:\\
+    1. \For {edge $\in$ Edges:}{
+            \quad edge.edgeValue = 0\;}
+    2. \For {pixel $\in$ Pixels:} {
+            \quad pixel.Neighbors = $\{$Edges[pixelNum-1],Edges[pixelNum+1]$\}$\;
+            \quad\If{pixel.w \textgreater threshold:}{
+                \quad edgeValue = edgeValue+1 for both adjacent edges\;}}
+    3. \If{$\exists!$(edge1,edge2) $\mid$ edge1.edgeValue = edge2.edgevalue = 1:}{
+            \quad region = Join(edge1,edge2)\;
+            \quad Areas = [region];}
+    4. \Else{\quad joinedEdges[2] = $\{$null, null$\}$\;
+             \quad int i = 0\;
+            \quad\For{edge1 $\in$ Edges $\mid$ edge1.edgeValue = 1:}{
+                \quad\For{edge2 $\in$ Edges $\mid$ edge2.edgeValue = 2:}{
+                    \quad region = Join(edge1,edge2)\;
+                    \quad joinedEdges[i] = (region)\;
+                    \quad i = i + 1\;
+                }
+            \quad Areas = joinedEdges\;
+            }
+        }
+    5. \For {area $\in$ Areas:}{
+        \quad\While{numVerts $\in$ area \textgreater 3:}{
+            \quad triangle = (sub-triangle of rectangle "area")\;
+            \quad area = area - triangle\;
+            \quad Areas.Append(triangle)\;}
+        }
+}
+\end{algorithm}
+\newpage
+
+And this does work, conceptually.
+In triangulate, we need step 4 to handle our case where two opposite corners = 1, and we need step 5 for our cases where two adjacent corners = 1 or three corners = 1, but it otherwise seems like we don't need to hardcode any of our cases.
+
+...How would we actually make this work in a computer, though?
+What is an "edge"? What is an "area"? How do we take a "sub-triangle"? How do we perform a "Join"?
+At some point while answering these questions, one starts to think that it's probably easier to just hardcode all 16 cases.
+So we'll do something clever.
+
+We know that our cell has 4 pixels, and we know that there are 16 cases.
+We can easily map any given cell to its case by building a half-byte, or nibble, from its pixels. Earlier, we agreed to number our pixels 0-3. If all our pixels are "0"s, then we have the nibble 0000. If our 0th pixel is a "1", then we have the nibble 0001. If our 1st pixel is a "1", then we have the nibble 0010, and so on. Since $2^4$ = 16, we know that a nibble is just a counter that increments from 0 to 16. Therefore, if we build a 16-item long table, where each entry contains instructions for the case that corresponds to that nibble, then we've solved our problem!
+
+Let's try building it.
+Consider the following cell:
+
+[INSERT FIGURE]
+
+This cell's nibble is 0110, which is 6 in decimal.
+Therefore, we know that this ought to be resolved by case 6!
+
+What, exactly, should our instructions be, then?
+Well, we know that we want our final mesh to be built of triangles, and we know that the most complicated mesh (the three-corner case) is composed of three triangles (visualized here):
+
+[INSERT FIGURE]
+
+So, we could make each entry in our table a 3-entry array, where each entry is a triangle (pixel, edge, edge). If a triangle entry is all 0s, we just ignore it.
+So, for case 6, we would have an entry that looks like {(1, ?, ?), (2, ?, ?), (0,0,0)}
+Let's draw those triangles! [INSERT FIGURE]
+
+That all works! We'll build out our whole table [REFERENCE TO TABLES CHAPTER], and then we can define our algorithm rigorously:
+
+\begin{algorithm}
+\Fn{\FTriangulate{cell}}{:\\
+    1. cellType = 0\;
+    2. pixelArray = (pixel0, pixel1, ... pixel7)\;
+    3. \For {i in pixelArray:}{
+        if (pixelArray[i].w \textgreater threshold), cellType += (bitShift(i)) [RENAME BITSHIFT]}
+    4. vertSet = triTable[cellType]\;
+    5. vertSet = vertSet[s] where s[0] != 0\;
+    6. RenderTriangles.Append(vertSet)\;
+}
+\end{algorithm}
+
+Here, "RenderTriangles" refers to the set of triangles that will be rendered to our screen. For now, we can just assume that our computer handles this for us.
+
+Now, we just need to apply this algorithm to all cells in our entire point space! Since we're going to go one cell at a time, and each cell is a square, what if we define our algorithm like this?
+
+\SetKwFunction{FMarchingSquares}{MarchingSquares}{}
+\begin{algorithm}
+\Fn{\FMarchingSquares{xyGrid}}{:\\
+    1. \For {square in xyGrid:}{
+        Triangulate(square);
+    }
+}
+\end{algorithm}
+    
+That's marching squares (at least conceptually)!
+
+\section{Marching Cubes}
+
+Now it's time to talk about the real deal: Marching Cubes, the 3D implementation of Marching Squares.
+We'll call our points in space "voxels" instead of "pixels", since they're 3D points now, and a "cell" is no longer a square of four points; rather, a "cell" refers to a cube of 8 points.
+Just like with our 2D "cell", we'll number the points and edges of our 3D "cell", like so:
+
+[INSERT FIGURE]
+
+With marching squares, we used each cell to form a nibble (0000 - 1111), and used this to map any given cell to one of 16 possible arrangements, where each arrangement is 3 (pixel, edge, edge) entries.
+
+For marching cubes, we will use each cell to form a byte (00000000 - 11111111), since we now have 8 voxels instead of 4 pixels. This results in $2^8$ = 256 possible arrangements, where each arrangement is 5 (edge, edge, edge) arrangements.
+
+Your first thought might be "oh, well, we won't have to actually hardcode all 256 arrangements, there must be a smarter way!" -- and you might even be right about that. But if we want our algorithm to work quickly, and we do, then the most efficient way to get this all to come together is if we actually do go case-by-case and build out our table.
+
+Fortunately for my sanity, and for this paper's brevity, this table is easily found on the internet written as a C array. [REFERENCE TO TABLES CHAPTER]
+
+Let's talk about a few cases anyway, since it will be helpful for understanding our algorithm.
+You might have noticed already noticed that for Marching Squares each entry was a (pixel, edge, edge), whereas here, entries are written (edge, edge, edge) instead of (voxel, edge, edge). Why is this?
+
+For the case where only one pixel was a "1" on a square cell, we did the following:
+
+[INSERT FIGURE]
+
+However, for the case where only one voxel is a "1" on a cube cell, writing that as a (voxel, edge, edge) would look like this:
+
+[INSERT FIGURE]
+
+What we want instead is the following (edge, edge, edge) triangle:
+
+[INSERT FIGURE]
+
+This makes sense once we recognize the pattern that's present here. With Marching Squares, for a given cell, we joined the edges that were adjacent to strictly one "1" pixel such that all shapes formed by doing so contained a "1" pixel. Here, we're doing something similar -- it's just that, to form a triangle by joining edges across a square, we need to use a pixel as the third vertex, whereas here, we form a triangle just be joining three edges across our cube.
+
+It's worth noting that this leads to some fairly strange shapes:
+
+[INSERT FIGURE]
+
+However, once we actually march across multiple cells and stitch together the resulting mesh, we get nice-looking results:
+
+[INSERT FIGURE]
+
+We could, if we wanted, try rigorously define our marching cubes algorithm right here and now. However -- in order to do so, we're going to want to step out of the abstracted world of pseudocode for a moment, and really think about how we would write this as real code. Doing that is going to require some groundwork first.
+
+\section{...What about the real world?}
+
+I would completely understand if, by this point, you're starting to get a little restless. After all, we've done a whole lot of talking about algorithms, but we haven't addressed an important question: how would we implement this in a real application? What kind of assumptions that we've been making will get in our way? Will there be any serious problems we need to solve?
+
+Before we get into talking about the implementation I've built, I will begin with a warning: we have made many assumptions that will get in our way, and some of them are directly tied to some truly heinous problems that we need to solve.
+
+We're going to use C\# with the Unity game engine, and we'll talk our way from start to finish using real code. There are many reasons why we might choose Unity for this, but the most important among them are that Unity is versatile, it's an industry-standard tool, it's easy to understand, and it's built with 3D in mind.
+
+    \chapter{The First}
+    	This is the first page of the first chapter. You may delete the contents of this chapter so you can add your own text; it's just here to show you some examples. 
+	
+\section{References, Labels, Custom Commands and Footnotes}
+It is easy to refer to anything within your document using the \texttt{label} and \texttt{ref} tags.  Labels must be unique and shouldn't use any odd characters; generally sticking to letters and numbers (no spaces) should be fine. Put the label on whatever you want to refer to, and put the reference where you want the reference. \LaTeX\ will keep track of the chapter, section, and figure or table numbers for you. 
+
+\subsection{References and Labels}
+Sometimes you'd like to refer to a table or figure, e.g. you can see in Figure \ref{subd2} that you can rotate figures . Start by labeling your figure or table with the label command (\verb=\label{labelvariable}=) below the caption (see the chapter on graphics and tables for examples). Then when you would like to refer to the table or figure, use the ref command (\verb=\ref{labelvariable}=). Make sure your label variables are unique; you can't have two elements named ``default." Also, since the reference command only puts the figure or table number, you will have to put  ``Table" or ``Figure" as appropriate, as seen in the following examples:
+
+ As I showed in Table \ref{inheritance} many factors can be assumed to follow from inheritance. Also see the Figure \ref{subd} for an illustration.
+ 
+\subsection{Custom Commands}\label{commands}
+Are you sick of writing the same complex equation or phrase over and over? 
+
+The custom commands should be placed in the preamble, or at least prior to the first usage of the command. The structure of the \verb=\newcommand= consists of the name of the new command in curly braces, the number of arguments to be made in square brackets and then, inside a new set of curly braces, the command(s) that make up the new command. The whole thing is sandwiched inside a larger set of curly braces. 
+
+% Note: you cannot use numbers in your commands!
+\newcommand{\hydro}{H$_2$SO$_4$}
+
+In other words, if you want to make a shorthand for H$_2$SO$_4$, which doesn't include an argument, you would write: \verb=\newcommand{\hydro}{H$_2$SO$_4$}= and then when you needed  to use the command you would type \verb=\hydro=. (sans verb and the equals sign brackets, if you're looking at the .tex version). For example: \hydro
+
+\subsection{Footnotes and Endnotes}
+	You might want to footnote something.\footnote{footnote text} Be sure to leave no spaces between the word immediately preceding the footnote command and the command itself. The footnote will be in a smaller font and placed appropriately. Endnotes work in much the same way. More information can be found about both on the CUS site.
+	
+\section{Bibliographies}
+	Of course you will need to cite things, and you will probably accumulate an armful of sources. This is why BibTeX was created. For more information about BibTeX and bibliographies, see our CUS site (\url{web.reed.edu/cis/help/latex/index.html})\footnote{\cite{reedweb:2007}}. There are three pages on this topic: {\it bibtex} (which talks about using BibTeX, at \url{/latex/bibtex.html}), {\it bibtexstyles} (about how to find and use the bibliography style that best suits your needs, at \url{/latex/bibtexstyles.html}) and {\it bibman} (which covers how to make and maintain a bibliography by hand, without BibTeX, at at \url{/latex/bibman.html}). The last page will not be useful unless you have only a few sources. There used to be APA stuff here, but we don't need it since I've fixed this with my apa-good natbib style file.
+	
+\subsection{Tips for Bibliographies}
+\begin{enumerate}
+\item Like with thesis formatting, the sooner you start compiling your bibliography for something as large as thesis, the better. Typing in source after source is mind-numbing enough; do you really want to do it for hours on end in late April? Think of it as procrastination.
+\item The cite key (a citation's label) needs to be unique from the other entries.
+\item When you have more than one author or editor, you need to separate each author's name by the word ``and'' e.g.\\ \verb+Author = {Noble, Sam and Youngberg, Jessica},+.
+\item Bibliographies made using BibTeX (whether manually or using a manager) accept LaTeX markup, so you can italicize and add symbols as necessary.
+\item To force capitalization in an article title or where all lowercase is generally used, bracket the capital letter in curly braces.
+\item You can add a Reed Thesis citation\footnote{\cite{noble:2002}} option. The best way to do this is to use the phdthesis type of citation, and use the optional ``type'' field to enter ``Reed thesis'' or ``Undergraduate thesis''. Here's a test of Chicago, showing the second cite in a row\footnote{\cite{noble:2002}} being different. Also the second time not in a row\footnote{\cite{reedweb:2007}} should be different. Of course in other styles they'll all look the same.
+\end{enumerate}
+\section{Anything else?}
+If you'd like to see examples of other things in this template, please contact CUS (email cus@reed.edu) with your suggestions. We love to see people using \LaTeX\ for their theses, and are happy to help.
+
+
+\chapter{Mathematics and Science}	
+\section{Math}
+	\TeX\ is the best way to typeset mathematics. Donald Knuth designed \TeX\ when he got frustrated at how long it was taking the typesetters to finish his book, which contained a lot of mathematics. 
+	
+	If you are doing a thesis that will involve lots of math, you will want to read the following section which has been commented out. If you're not going to use math, skip over this next big red section. (It's red in the .tex file but does not show up in the .pdf.)
+%	
+%% MATH and PHYSICS majors: Uncomment the following section	
+%	$$\sum_{j=1}^n (\delta\theta_j)^2 \leq {{\beta_i^2}\over{\delta_i^2 + \rho_i^2}}
+%\left[ 2\rho_i^2 + {\delta_i^2\beta_i^2\over{\delta_i^2 + \rho_i^2}} \right] \equiv \omega_i^2
+%$$
+
+%From Informational Dynamics, we have the following (Dave Braden):
+
+%After {\it n} such encounters the posterior density for $\theta$ is
+
+%$$
+%\pi(\theta|X_1< y_1,\dots,X_n<y_n) \varpropto \pi(\theta) \prod_{i=1}^n\int_{-\infty}^{y_i}
+%   \exp\left(-{(x-\theta)^2\over{2\sigma^2}}\right)\ dx
+%$$
+
+%
+
+%Another equation:
+
+%$$\det\left|\,\begin{matrix}%
+%c_0&c_1\hfill&c_2\hfill&\ldots&c_n\hfill\cr
+%c_1&c_2\hfill&c_3\hfill&\ldots&c_{n+1}\hfill\cr
+%c_2&c_3\hfill&c_4\hfill&\ldots&c_{n+2}\hfill\cr
+%\,\vdots\hfill&\,\vdots\hfill&
+%  \,\vdots\hfill&&\,\vdots\hfill\cr
+%c_n&c_{n+1}\hfill&c_{n+2}\hfill&\ldots&c_{2n}\hfill\cr
+%\end{matrix}\right|>0$$
+
+%
+%Lapidus and Pindar, Numerical Solution of Partial Differential Equations in Science and
+%Engineering.  Page 54
+
+%$$
+%\int_t\left\{\sum_{j=1}^3 T_j \left({d\phi_j\over dt}+k\phi_j\right)-kT_e\right\}w_i(t)\ dt=0,
+%   \qquad\quad i=1,2,3. 
+%$$
+
+%L\&P  Galerkin method weighting functions.  Page 55
+
+%$$
+%\sum_{j=1}^3 T_j\int_0^1\left\{{d\phi_j\over dt} + k\phi_j\right\} \phi_i\ dt 
+%   = \int_{0}^1k\,T_e\phi_idt, \qquad i=1,2,3 $$
+%   
+%Another L\&P (p145)
+
+%$$
+%\int_{-1}^1\!\int_{-1}^1\!\int_{-1}^1 f\big(\xi,\eta,\zeta\big) 
+%   = \sum_{k=1}^n\sum_{j=1}^n\sum_{i=1}^n w_i w_j w_k f\big( \xi,\eta,\zeta\big).
+%$$
+
+%Another L\&P (p126)
+
+%$$
+%\int_{A_e} (\,\cdot\,) dx dy = \int_{-1}^1\!\int_{-1}^1 (\,\cdot\,) \det[J] d\xi d\eta.
+%$$
+
+\section{Chemistry 101: Symbols}
+Chemical formulas will look best if they are not italicized. Get around math mode's automatic italicizing by using the argument \verb=$\mathrm{formula here}$=, with your formula inside the curly brackets.
+
+So, $\mathrm{Fe_2^{2+}Cr_2O_4}$ is written \verb=$\mathrm{Fe_2^{2+}Cr_2O_4}$=\\
+Exponent or Superscript: O$^{-}$\\
+Subscript: CH$_{4}$\\
+
+To stack numbers or letters as in $\mathrm{Fe_2^{2+}}$, the subscript is defined first, and then the superscript is defined.\\
+Angstrom: {\AA}\\
+Bullet: CuCl $\bullet$ 7H${_2}$O\\
+Double Dagger: \ddag \/\\
+Delta: $\Delta$\\
+Reaction Arrows: $\longrightarrow$ or  $\xrightarrow{solution}$\\
+Resonance Arrows: $\leftrightarrow$\\
+Reversible Reaction Arrows: $\rightleftharpoons$ or $\xrightleftharpoons[ ]{solution}$ (the latter requires the chemarr package)\\
+
+
+\subsection{Typesetting reactions}
+You may wish to put your reaction in a figure environment, which means that LaTeX will place the reaction where it fits and you can have a figure legend if desired:
+\begin{figure}[htbp]
+\begin{center}
+$\mathrm{C_6H_{12}O_6  + 6O_2} \longrightarrow \mathrm{6CO_2 + 6H_2O}$
+\caption{Combustion of glucose}
+\label{combustion of glucose}
+\end{center}
+\end{figure}
+
+\subsection{Other examples of reactions}
+$\mathrm{NH_4Cl_{(s)}} \rightleftharpoons \mathrm{NH_{3(g)}+HCl_{(g)}}$\\
+$\mathrm{MeCH_2Br + Mg} \xrightarrow[below]{above} \mathrm{MeCH_2\bullet Mg \bullet Br}$
+
+\section{Physics}
+
+Many of the symbols you will need can be found on the math page (\url{http://web.reed.edu/cis/help/latex/math.html}) and the Comprehensive \LaTeX\ Symbol Guide (enclosed in this template download).  You may wish to create custom commands for commonly used symbols, phrases or equations, as described in Chapter \ref{commands}.
+
+\section{Biology}
+You will probably find the resources at \url{http://www.lecb.ncifcrf.gov/~toms/latex.html} helpful, particularly the links to bsts for various journals. You may also be interested in TeXShade for nucleotide typesetting (\url{http://homepages.uni-tuebingen.de/beitz/txe.html}).  Be sure to read the proceeding chapter on graphics and tables, and remember that the thesis template has versions of Ecology and Science bsts which support webpage citation formats. 
+
+\chapter{Tables and Graphics}
+
+\section{Tables}
+	The following section contains examples of tables, most of which have been commented out for brevity. (They will show up in the .tex document in red, but not at all in the .pdf). For more help in constructing a table (or anything else in this document), please see the LaTeX pages on the CUS site. 
+
+\begin{table}[htbp] % begins the table floating environment. This enables LaTeX to fit the table where it works best and lets you add a caption.
+\caption[Correlation of Inheritance Factors between Parents and Child]{Correlation of Inheritance Factors between Parents and Child} 
+% The words in square brackets of the caption command end up in the Table of Tables. The words in curly braces are the caption directly over the table.
+\begin{center} 
+% makes the table centered
+\begin{tabular}{c c c c} 
+% the tabular environment is used to make the table itself. The {c c c c} specify that the table will have four columns and they will all be center-aligned. You can make the cell contents left aligned by replacing the Cs with Ls or right aligned by using Rs instead. Add more letters for more columns, and pipes (the vertical line above the backslash) for vertical lines. Another useful type of column is the p{width} column, which forces text to wrap within whatever width you specify e.g. p{1in}. Text will wrap badly in narrow columns though, so beware.
+\toprule % a horizontal line, slightly thicker than \hline, depends on the booktabs package
+  Factors &  Correlation between Parents \& Child & Inherited \\ % the first row of the table. Separate columns with ampersands and end the line with two backslashes. An environment begun in one cell will not carry over to adjacent rows.
+  \midrule % another horizontal line
+	Education 				& -0.49 & Yes 	 \\ % another row
+	Socio-Economic Status 	& 0.28 	& Slight \\
+	Income 					& 0.08 	& No	 \\
+	Family Size 			& 0.19 	& Slight \\
+	Occupational Prestige 	& 0.21 	& Slight \\
+\bottomrule % yet another horizontal line
+\end{tabular}
+\end{center}
+\label{inheritance} % labels are useful when you have more than one table or figure in your document. See our online documentation for more on this.
+\end{table}
+
+	\clearpage 
+%% \clearpage ends the page, and also dumps out all floats. 
+%% Floats are things like tables and figures.
+
+If you want to make a table that is longer than a page, you will want to use the longtable environment. Uncomment the table below to see an example, or see our online documentation.
+
+%% An example of a long table, with headers that repeat on each subsequent page: Results from the summers of 1998 and 1999 work at Reed College done by Grace Brannigan, Robert Holiday and Lien Ngo in 1998 and Kate Brown and Christina Inman in 1999.
+
+	\begin{longtable}{||c|c|c|c||}
+	 	\caption[Chromium Hexacarbonyl Data Collected in 1998--1999]{Chromium Hexacarbonyl Data Collected in 1998--1999}\\ \hline
+	    	  \multicolumn{4}{||c||}{Chromium Hexacarbonyl} \\\hline
+		   State & Laser wavelength & Buffer gas & Ratio of $\frac{\textrm{Intensity
+at vapor pressure}}{\textrm{Intensity at 240 Torr}}$ \\ \hline
+		  \endfirsthead
+		\hline     State & Laser wavelength & Buffer gas & Ratio of
+$\frac{\textrm{Intensity at vapor pressure}}{\textrm{Intensity at 240 Torr}}$\\
+\hline
+		    \endhead
+
+	    $z^{7}P^{\circ}_{4}$ & 266 nm & Argon & 1.5 \\\hline
+	    $z^{7}P^{\circ}_{2}$ & 355 nm & Argon & 0.57 \\\hline
+	    $y^{7}P^{\circ}_{3}$ & 266 nm & Argon & 1 \\\hline
+	    $y^{7}P^{\circ}_{3}$ & 355 nm & Argon & 0.14 \\\hline
+	    $y^{7}P^{\circ}_{2}$ & 355 nm & Argon & 0.14 \\\hline
+	    $z^{5}P^{\circ}_{3}$ & 266 nm & Argon & 1.2 \\\hline
+	    $z^{5}P^{\circ}_{3}$ & 355 nm & Argon & 0.04 \\\hline
+	    $z^{5}P^{\circ}_{3}$ & 355 nm & Helium & 0.02 \\\hline
+	    $z^{5}P^{\circ}_{2}$ & 355 nm & Argon & 0.07 \\\hline
+	    $z^{5}P^{\circ}_{1}$ & 355 nm & Argon & 0.05 \\\hline
+	    $y^{5}P^{\circ}_{3}$ & 355 nm & Argon & 0.05, 0.4 \\\hline
+	    $y^{5}P^{\circ}_{3}$ & 355 nm & Helium & 0.25 \\\hline
+	    $z^{5}F^{\circ}_{4}$ & 266 nm & Argon & 1.4 \\\hline
+	    $z^{5}F^{\circ}_{4}$ & 355 nm & Argon & 0.29 \\\hline
+	    $z^{5}F^{\circ}_{4}$ & 355 nm & Helium & 1.02 \\\hline
+	    $z^{5}D^{\circ}_{4}$ & 355 nm & Argon & 0.3 \\\hline
+	    $z^{5}D^{\circ}_{4}$ & 355 nm & Helium & 0.65 \\\hline
+	    $y^{5}H^{\circ}_{7}$ & 266 nm & Argon & 0.17 \\\hline
+	    $y^{5}H^{\circ}_{7}$ & 355 nm & Argon & 0.13 \\\hline
+	    $y^{5}H^{\circ}_{7}$ & 355 nm & Helium & 0.11 \\\hline
+	    $a^{5}D_{3}$ & 266 nm & Argon & 0.71 \\\hline
+	    $a^{5}D_{2}$ & 266 nm & Argon & 0.77 \\\hline
+	    $a^{5}D_{2}$ & 355 nm & Argon & 0.63 \\\hline
+	    $a^{3}D_{3}$ & 355 nm & Argon & 0.05 \\\hline
+	    $a^{5}S_{2}$ & 266 nm & Argon & 2 \\\hline
+	    $a^{5}S_{2}$ & 355 nm & Argon & 1.5 \\\hline
+	    $a^{5}G_{6}$ & 355 nm & Argon & 0.91 \\\hline
+	    $a^{3}G_{4}$ & 355 nm & Argon & 0.08 \\\hline
+	    $e^{7}D_{5}$ & 355 nm & Helium & 3.5 \\\hline
+	    $e^{7}D_{3}$ & 355 nm & Helium & 3 \\\hline
+	    $f^{7}D_{5}$ & 355 nm & Helium & 0.25 \\\hline
+	    $f^{7}D_{5}$ & 355 nm & Argon & 0.25 \\\hline
+	    $f^{7}D_{4}$ & 355 nm & Argon & 0.2 \\\hline
+	    $f^{7}D_{4}$ & 355 nm & Helium & 0.3 \\\hline
+	    \multicolumn{4}{||c||}{Propyl-ACT} \\\hline
+%	    State & Laser wavelength & Buffer gas & Ratio of $\frac{\textrm{Intensity
+%at vapor pressure}}{\textrm{Intensity at 240 Torr}}$\\ \hline
+	    $z^{7}P^{\circ}_{4}$ & 355 nm & Argon & 1.5 \\\hline
+	    $z^{7}P^{\circ}_{3}$ & 355 nm & Argon & 1.5 \\\hline
+	    $z^{7}P^{\circ}_{2}$ & 355 nm & Argon & 1.25 \\\hline
+	    $z^{7}F^{\circ}_{5}$ & 355 nm & Argon & 2.85 \\\hline
+	    $y^{7}P^{\circ}_{4}$ & 355 nm & Argon & 0.07 \\\hline
+	    $y^{7}P^{\circ}_{3}$ & 355 nm & Argon & 0.06 \\\hline
+	    $z^{5}P^{\circ}_{3}$ & 355 nm & Argon & 0.12 \\\hline
+	    $z^{5}P^{\circ}_{2}$ & 355 nm & Argon & 0.13 \\\hline
+	    $z^{5}P^{\circ}_{1}$ & 355 nm & Argon & 0.14 \\\hline
+	    \multicolumn{4}{||c||}{Methyl-ACT} \\\hline
+%	    State & Laser wavelength & Buffer gas & Ratio of $\frac{\textrm{Intensity
+% at vapor pressure}}{\textrm{Intensity at 240 Torr}}$\\ \hline
+	    $z^{7}P^{\circ}_{4}$ & 355 nm & Argon & 1.6, 2.5 \\\hline
+	    $z^{7}P^{\circ}_{4}$ & 355 nm & Helium & 3 \\\hline
+	    $z^{7}P^{\circ}_{4}$ & 266 nm & Argon & 1.33 \\\hline
+	    $z^{7}P^{\circ}_{3}$ & 355 nm & Argon & 1.5 \\\hline
+	    $z^{7}P^{\circ}_{2}$ & 355 nm & Argon & 1.25, 1.3 \\\hline
+	    $z^{7}F^{\circ}_{5}$ & 355 nm & Argon & 3 \\\hline
+	    $y^{7}P^{\circ}_{4}$ & 355 nm & Argon & 0.07, 0.08 \\\hline
+	    $y^{7}P^{\circ}_{4}$ & 355 nm & Helium & 0.2 \\\hline
+	    $y^{7}P^{\circ}_{3}$ & 266 nm & Argon & 1.22 \\\hline
+	    $y^{7}P^{\circ}_{3}$ & 355 nm & Argon & 0.08 \\\hline
+	    $y^{7}P^{\circ}_{2}$ & 355 nm & Argon & 0.1 \\\hline
+	    $z^{5}P^{\circ}_{3}$ & 266 nm & Argon & 0.67 \\\hline
+	    $z^{5}P^{\circ}_{3}$ & 355 nm & Argon & 0.08, 0.17 \\\hline
+	    $z^{5}P^{\circ}_{3}$ & 355 nm & Helium & 0.12 \\\hline
+	    $z^{5}P^{\circ}_{2}$ & 355 nm & Argon & 0.13 \\\hline
+	    $z^{5}P^{\circ}_{1}$ & 355 nm & Argon & 0.09 \\\hline
+	    $y^{5}H^{\circ}_{7}$ & 355 nm & Argon & 0.06, 0.05 \\\hline
+	    $a^{5}D_{3}$ & 266 nm & Argon & 2.5 \\\hline
+	    $a^{5}D_{2}$ & 266 nm & Argon & 1.9 \\\hline
+	    $a^{5}D_{2}$ & 355 nm & Argon & 1.17 \\\hline
+	    $a^{5}S_{2}$ & 266 nm & Argon & 2.3 \\\hline
+	    $a^{5}S_{2}$ & 355 nm & Argon & 1.11 \\\hline
+	    $a^{5}G_{6}$ & 355 nm & Argon & 1.6 \\\hline
+	    $e^{7}D_{5}$ & 355 nm & Argon & 1 \\\hline
+
+		\end{longtable}
+
+   
+   \section{Figures}
+   
+	If your thesis has a lot of figures, \LaTeX\ might behave better for you than that other word processor.  One thing that may be annoying is the way it handles ``floats'' like tables and figures. \LaTeX\ will try to find the best place to put your object based on the text around it and until you're really, truly done writing you should just leave it where it lies.   There are some optional arguments to the figure and table environments to specify where you want it to appear; see the comments in the first figure.
+
+	If you need a graphic or tabular material to be part of the text, you can just put it inline. If you need it to appear in the list of figures or tables, it should be placed in the floating environment. 
+	
+	To get a figure from StatView, JMP, SPSS or other statistics program into a figure, you can print to pdf or save the image as a jpg or png. Precisely how you will do this depends on the program: you may need to copy-paste figures into Photoshop or other graphic program, then save in the appropriate format.
+	
+	Below we have put a few examples of figures. For more help using graphics and the float environment, see our online documentation.
+	
+	And this is how you add a figure with a graphic:
+	\begin{figure}[h]
+	% the options are h = here, t = top, b = bottom, p = page of figures.
+	% you can add an exclamation mark to make it try harder, and multiple
+	% options if you have an order of preference, e.g.
+	% \begin{figure}[h!tbp]
+	   
+	       \centering
+	    % DO NOT ADD A FILENAME EXTENSION TO THE GRAPHIC FILE
+	    \includegraphics{subdivision}
+	     \caption{A Figure}
+	 \label{subd}
+	\end{figure}
+
+\clearpage %% starts a new page and stops trying to place floats such as tables and figures
+
+\section{More Figure Stuff}
+You can also scale and rotate figures.
+ 	\begin{figure}[h!]
+	   
+	       \centering
+	    % DO NOT ADD A FILENAME EXTENSION TO THE GRAPHIC FILE
+	    \includegraphics[scale=0.5,angle=180]{subdivision}
+	    % if your figure shows up not where you want it, it may just be too big to fit. You can use the scale argument to shrink it, e.g. scale=0.85 is 85 percent of the original size. 
+	     \caption{A Smaller Figure, Flipped Upside Down}
+	 \label{subd2}
+	\end{figure}
+
+\section{Even More Figure Stuff}
+With some clever work you can crop a figure, which is handy if (for instance) your EPS or PDF is a little graphic on a whole sheet of paper. The viewport arguments are the lower-left and upper-right coordinates for the area you want to crop.
+
+ 	\begin{figure}[h!]
+	    	       \centering
+	    % DO NOT ADD A FILENAME EXTENSION TO THE GRAPHIC FILE
+	   \includegraphics[clip=true, viewport=.0in .0in 1in 1in]{subdivision}
+	    \caption{A Cropped Figure}
+	 \label{subd3}
+	\end{figure}
+	
+      \subsection{Common Modifications}
+      The following figure features the more popular changes thesis students want to their figures. This information is also on the web at \url{web.reed.edu/cis/help/latex/graphics.html}.
+    %\renewcommand{\thefigure}{0.\arabic{figure}} 	% Renumbers the figure to the type 0.x
+    %\addtocounter{figure}{4} 						% starts the figure numbering at 4
+    \begin{figure}[htbp]
+    \begin{center}
+   \includegraphics[scale=0.5]{subdivision}
+    \caption[Subdivision of arc segments]{\footnotesize{Subdivision of arc segments. You can see that $ p_3 = p_6^\prime$.}} %the special ToC caption is in square brackets. The \footnotesize makes the figure caption smaller
+    \label{barplot}
+    \end{center}
+    \end{figure} 
+
+\chapter*{Conclusion}
+         \addcontentsline{toc}{chapter}{Conclusion}
+	\chaptermark{Conclusion}
+	\markboth{Conclusion}{Conclusion}
+	\setcounter{chapter}{4}
+	\setcounter{section}{0}
+	
+Here's a conclusion, demonstrating the use of all that manual incrementing and table of contents adding that has to happen if you use the starred form of the chapter command. The deal is, the chapter command in \LaTeX\ does a lot of things: it increments the chapter counter, it resets the section counter to zero, it puts the name of the chapter into the table of contents and the running headers, and probably some other stuff. 
+
+So, if you remove all that stuff because you don't like it to say ``Chapter 4: Conclusion'', then you have to manually add all the things \LaTeX\ would normally do for you. Maybe someday we'll write a new chapter macro that doesn't add ``Chapter X'' to the beginning of every chapter title.
+
+\section{More info}
+And here's some other random info: the first paragraph after a chapter title or section head \emph{shouldn't be} indented, because indents are to tell the reader that you're starting a new paragraph. Since that's obvious after a chapter or section title, proper typesetting doesn't add an indent there. 
+
+
+%If you feel it necessary to include an appendix, it goes here.
+    \appendix
+      \chapter{The First Appendix}
+      \chapter{The Second Appendix, for Fun}
+
+
+%This is where endnotes are supposed to go, if you have them.
+%I have no idea how endnotes work with LaTeX.
+
+  \backmatter % backmatter makes the index and bibliography appear properly in the t.o.c...
+
+% if you're using bibtex, the next line forces every entry in the bibtex file to be included
+% in your bibliography, regardless of whether or not you've cited it in the thesis.
+    \nocite{*}
+
+% Rename my bibliography to be called "Works Cited" and not "References" or ``Bibliography''
+% \renewcommand{\bibname}{Works Cited}
+
+%    \bibliographystyle{bsts/mla-good} % there are a variety of styles available; 
+%  \bibliographystyle{plainnat}
+% replace ``plainnat'' with the style of choice. You can refer to files in the bsts or APA 
+% subfolder, e.g. 
+ \bibliographystyle{APA/apa-good}  % or
+ \bibliography{thesis}
+ % Comment the above two lines and uncomment the next line to use biblatex-chicago.
+ %\printbibliography[heading=bibintoc]
+
+% Finally, an index would go here... but it is also optional.
+\end{document}
