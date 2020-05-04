@@ -1,0 +1,95 @@
+﻿//This is a fairly modified version of Sebastian Lague's Marching Cubes implementation
+//You can find his here: https://github.com/SebLague/Marching-Cubes
+//It is far more fleshed out than what I managed to achieve in this project
+//Then again, this is my first encounter with computer shaders.
+#pragma kernel March
+#include "/Includes/MarchTables.compute"
+
+struct Triangle {
+    float3 vertA;
+    float3 vertB;
+    float3 vertC;
+};
+
+AppendStructuredBuffer<Triangle> tris; //a compute buffer to dump all our Triangle structs into
+RWStructuredBuffer<float4> voxels; //buffer of voxels (a coordinate + float value)
+static const int numThreads = 8;
+int resolution;
+float isoLevel;
+float vHSize;
+
+
+float3 vertMidpoint(float4 v1, float4 v2) {
+    return v1.xyz + 0.5 * (v2.xyz - v1.xyz);
+}
+
+int indexFromCoord(int x, int y, int z) {
+    return x + (y * resolution) + (z * resolution * resolution);
+}
+
+int edgeVertfromCornerVert(int cVert, bool firstCell)
+{
+    if (firstCell) {
+        if (cVert < 8) return cVert;
+        else return cVert - 8;
+    } else {
+        if (cVert == 7 || cVert == 3) {
+            return cVert - 3;
+        } else if (cVert < 7) {
+            return cVert + 1;
+        } else {
+            return cVert - 4;
+        }
+    }
+}
+
+[numthreads(numThreads, numThreads, numThreads)]
+void March(int3 id : SV_DispatchThreadID)
+{
+    // Stop one point before the end because voxel includes neighbouring points
+    if (id.x >= resolution - 1 || id.y >= resolution - 1 || id.z >= resolution - 1) {
+        return;
+    }
+
+    // 8 corners of the current cell
+    float4 CubeVerts[8] = {
+        voxels[indexFromCoord(id.x,     id.y,     id.z)],
+        voxels[indexFromCoord(id.x + 1, id.y,     id.z)],
+        voxels[indexFromCoord(id.x + 1, id.y,     id.z + 1)],
+        voxels[indexFromCoord(id.x,     id.y,     id.z + 1)],
+        voxels[indexFromCoord(id.x,     id.y + 1, id.z)],
+        voxels[indexFromCoord(id.x + 1, id.y + 1, id.z)],
+        voxels[indexFromCoord(id.x + 1, id.y + 1, id.z + 1)],
+        voxels[indexFromCoord(id.x,     id.y + 1, id.z + 1)]
+    };
+
+    //get cell type for given cell using MarchTables
+    int cubeIndex = 0;
+    for (int currV = 0; currV < 8; currV++) {
+        if (CubeVerts[currV].w > isoLevel) {
+            cubeIndex |= int(pow(2, currV));
+        }
+    }
+
+    // Create triangles for current cube configuration
+    for (int i = 0; triTable[cubeIndex][i] != -1; i += 3) {
+        // Get indices of corner points A and B for each of the three edges
+        // of the cube that need to be joined to form the triangle.
+        float3 triArr[3];
+        for (int currTri = 0; currTri < 3; currTri++)
+        {
+            triArr[currTri] = vertMidpoint(CubeVerts[edgeVertfromCornerVert(triTable[cubeIndex][i+currTri], true)],
+                                           CubeVerts[edgeVertfromCornerVert(triTable[cubeIndex][i+currTri], false)]);
+        }
+
+        Triangle tri;
+        tri.vertA = triArr[0];
+        tri.vertB = triArr[1];
+        tri.vertC = triArr[2];
+        tris.Append(tri);
+        //render both sides of tri
+        tri.vertC = triArr[0];
+        tri.vertA = triArr[2];
+        tris.Append(tri);
+    }
+}
