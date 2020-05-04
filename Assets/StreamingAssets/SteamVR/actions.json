@@ -54,6 +54,11 @@
       "type": "vector2"
     },
     {
+      "name": "/actions/default/in/JumpButton",
+      "type": "boolean",
+      "requirement": "mandatory"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },

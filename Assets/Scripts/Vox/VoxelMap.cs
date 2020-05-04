@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class VoxelMap : MonoBehaviour
 {
+	public float midPoint;
 	public float threshold = 0.5f;	//threshold for points in space
 	public float voxelSize = 2f;    //size of a voxel across each axis
 	public float divisor = 0.05f;	//the float for affecting how strong the gradient is
@@ -29,6 +30,7 @@ public class VoxelMap : MonoBehaviour
 	//setup variables for chunk generation
 	private void Awake()
 	{
+		midPoint = voxelResolution * chunkResolution * voxelSize / 2;
 		chunkTimer = new System.Diagnostics.Stopwatch();
 		chunkOuter = new System.Diagnostics.Stopwatch();
 		chunkResSqr = chunkResolution * chunkResolution;

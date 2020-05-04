@@ -46,12 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c509060f535d5d044bfe9b5841556696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resolution: 8
-  size: 0
-  threshold: 0
-  voxels: []
-  shader: {fileID: 7200000, guid: 807b7047cac958c4a975867f04a5fd54, type: 3}
-  densityShader: {fileID: 7200000, guid: 7fb92b9aea53ba54ca8ea85ee5ab06c0, type: 3}
+  chunkMeshCollider: {fileID: 0}
+  chunkMesh: {fileID: 0}
+  cX: 0
+  cY: 0
+  cZ: 0
+  ciD: 0
 --- !u!23 &2050823902834752674
 MeshRenderer:
   m_ObjectHideFlags: 0
