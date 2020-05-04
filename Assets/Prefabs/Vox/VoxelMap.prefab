@@ -43,11 +43,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8f16d418e590d84b9ea13c1af98fd9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  midPoint: 0
   threshold: 0
   voxelSize: 1
-  divisor: 0.02
-  voxelResolution: 16
-  chunkResolution: 16
+  divisor: 0.01
+  voxelResolution: 32
+  chunkResolution: 8
   chunkPrefab: {fileID: 6025315535429627256, guid: 522c0805e1d4d784d8ff82986bc06a1e,
     type: 3}
   marchShader: {fileID: 7200000, guid: 807b7047cac958c4a975867f04a5fd54, type: 3}

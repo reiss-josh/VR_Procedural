@@ -8,7 +8,10 @@ public class Smooth_Locomotion : MonoBehaviour
 {
     public SteamVR_Action_Vector2 stickInput;
     public SteamVR_Action_Boolean jumpButton;
+    public SteamVR_Action_Boolean resetButton;
+    public SteamVR_Action_Boolean spawnButton;
     public VoxelMap voxMap; //specific to this project
+    public GameObject throwableCube; //specific to this project
     //private CharacterController controller;
     private Vector3 stickDir = Vector3.zero;
     public float speed = 6.0F;
@@ -18,6 +21,7 @@ public class Smooth_Locomotion : MonoBehaviour
     public Transform cameraPos;
     private Vector3 lastFrameCam = Vector3.zero;
     private Vector3 midPointTravel;
+    private int timer = 0;
 
     void Start()
     {
@@ -46,7 +50,6 @@ public class Smooth_Locomotion : MonoBehaviour
             //Multiply it by speed.
             moveDirection *= speed;
             //Jumping
-            //if (Input.GetButton("Jump"))
             if(jumpButton.GetState(SteamVR_Input_Sources.Any))
                 moveDirection.y = jumpSpeed;
 
@@ -55,5 +58,21 @@ public class Smooth_Locomotion : MonoBehaviour
         moveDirection.y -= gravity * Time.deltaTime;
         //Making the character move
         controller.Move(moveDirection * Time.deltaTime);
+
+        //in case you get stuck
+        if (Input.GetButton("Jump") || resetButton.GetState(SteamVR_Input_Sources.Any))
+        {
+            midPointTravel = new Vector3(voxMap.midPoint, voxMap.midPoint * 2, voxMap.midPoint);
+            transform.localPosition = midPointTravel;
+        }
+
+        if (spawnButton.GetState(SteamVR_Input_Sources.Any) && timer < 1)
+        {
+            Vector3 spawnPos = transform.position;
+            spawnPos.y += 5;
+            Instantiate(throwableCube, spawnPos, Quaternion.identity);
+            timer = 60;
+        }
+        if (timer > 0) timer--;
     }
 }
