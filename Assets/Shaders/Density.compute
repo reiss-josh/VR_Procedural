@@ -1,0 +1,53 @@
+﻿//This shader builds up the space of points for marching our cubes
+//You could use this shader to build an entirely cube-based world by simply placing cubes at these points, rather than marching them.
+
+#pragma kernel Density
+#include "/Includes/GLSL_Noise.compute"
+static const int numThreads = 8;
+
+RWStructuredBuffer<float4> voxels; //buffer of voxels (a coordinate + float value)
+
+int voxRes;
+float voxelSize;
+float tfx;
+float tfy;
+float tfz;
+float divisor;
+
+int indexFromCoord(int x, int y, int z) {
+    return z * voxRes * voxRes + y * voxRes + x;
+}
+
+float saturate(float x)
+{
+	return max(0, min(1, x));
+}
+
+[numthreads(numThreads, numThreads, numThreads)]
+void Density(int3 id : SV_DispatchThreadID)
+{
+	float hard_floor_y = 13;
+	if (id.x >= voxRes || id.y >= voxRes || id.z >= voxRes) {
+		return;
+	}
+	double vSize = voxelSize / 10;
+	float divver = divisor/10;
+	double3 tfL = { tfx/10, tfy/10, tfz/10 };
+	//double3 voxCenterCorrection = { voxMid - 0.5f, voxMid - 0.5f, voxMid - 0.5f };
+	//double3 chunkCenterCorrection = { 0,0,0}; //not implemented
+	double3 idAdj = (id) * vSize;
+	double3 ws = idAdj*divver + tfL*divver;
+	double density = -ws.y;
+	//density += snoise(ws.xyz).x;
+	//density += snoise(ws.xyz * 2).x*0.5;
+	density += snoise(ws.xyz * 4.03).x * 0.25;
+	density += snoise(ws.xyz * 1.96).x * 0.50;
+	density += snoise(ws.xyz * 1.01).x * 1.00;
+	density += saturate((hard_floor_y) * 3);
+	
+	int i = indexFromCoord(id.x, id.y, id.z);
+	voxels[i].x = (idAdj.x);
+	voxels[i].y = (idAdj.y);
+	voxels[i].z = (idAdj.z);
+	voxels[i].w = density;
+}
